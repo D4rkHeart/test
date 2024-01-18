@@ -1,0 +1,17 @@
+<div class="manage-category-component">
+    <mat-card class="mat-card">
+    <form class="category-form" [formGroup]="categoryGroup" (ngSubmit)="saveCategory()">
+        <mat-form-field>
+            <input matInput placeholder="Name" formControlName="name">
+            <mat-error *ngIf="categoryGroup.get('name')!.hasError('required')">
+                Le nom de la catégorie est obligatoire!
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button type="button" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">ANNULER</button>
+        <button *ngIf="category === undefined" mat-raised-button type="submit" class="mt-5" color="primary">AJOUTER UNE CATEGORIE</button>
+        <button *ngIf="category !== undefined" mat-raised-button type="submit" class="mt-5" color="primary">SAUVEGARDER LA CATEGORIE</button>
+    </form>
+    </mat-card>
+</div>
+
+

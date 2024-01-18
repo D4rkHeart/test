@@ -1,0 +1,29 @@
+.prodcutCard {
+    padding-left: 5px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    display: inline-flex;
+}
+
+mat-drawer-container {
+    height: 100%;
+}
+
+.buttonSideDrawer {
+    border: 0px;
+}
+
+.addProductCard {
+    width : 20%;
+}
+
+.mat-product-image {
+    width: 256px;
+    height: 256px;
+}
+
+.product-image{
+    display: inline-block;
+    width:100%;
+    height:100%;
+}

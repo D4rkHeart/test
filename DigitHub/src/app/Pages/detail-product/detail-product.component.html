@@ -1,0 +1,24 @@
+<app-header></app-header>
+<div class="detail-product-component">
+    <mat-card class="mat-card">
+    <form class="product-form" [formGroup]="productGroup" (ngSubmit)="addToCart()">
+        <div class="header-image">
+            <img *ngIf="image!=''" src="data:image/JPEG;base64,{{image}}" class="uploadedImage"/>
+        </div>
+       <mat-form-field appearance="outline">
+            <input matInput placeholder="Name" formControlName="category" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Name" formControlName="name" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Description" formControlName="description" readonly>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <input matInput placeholder="Prix" formControlName="price" readonly>
+        </mat-form-field>
+        <button mat-raised-button type="button" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">ANNULER</button>
+        <button mat-raised-button type="submit" class="mt-5" color="primary">AJOUTER AU PANIER</button>
+    </form>
+    </mat-card>
+</div>

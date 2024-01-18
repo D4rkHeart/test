@@ -1,0 +1,37 @@
+<div class="login-component">
+    <mat-card class="mat-card">
+        <mat-toolbar class="toolbar" color="primary">
+            <mat-toolbar-row>
+                <span class="span">Login</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <form class="login-form" [formGroup]="userGroup" (ngSubmit)="login()">
+            <div class="form-input">
+                <mat-form-field>
+                    <input matInput placeholder="Mail" formControlName="email" required>
+                    <mat-error *ngIf="userGroup.get('email')!.hasError('required')">
+                        L'email est obligatoire!
+                    </mat-error>
+                    <mat-error *ngIf="userGroup.get('email')!.hasError('email')">
+                        L'email n'est pas valide!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-input">
+                <mat-form-field>
+                    <input type="password" matInput placeholder="Password" formControlName="password" required>
+                    <mat-error *ngIf="userGroup.get('password')!.hasError('required')">
+                        Le mot de passe est obligatoire!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div>
+                <button mat-button type="button" class="forgottenPassord" routerLink="/retrieve-password" routerLinkActive="active" ariaCurrentWhenActive="page">Mot de passe oublié ?</button>
+            </div>
+            <div>
+                <button mat-raised-button type="button" class="cancelButton" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">CANCEL</button>
+                <button mat-raised-button type="submit" class="mt-5" color="primary">LOGIN</button>
+            </div>
+        </form>
+    </mat-card>
+</div>

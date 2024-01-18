@@ -1,0 +1,51 @@
+<div class="add-product-component">
+    <mat-card class="mat-card">
+    <form class="product-form" [formGroup]="productGroup" (ngSubmit)="saveProduct()">
+        <div class="dropzone">
+            <input type="file" class="file-input" (change)="onFileSelected($event)"/>
+            <img *ngIf="image==''"src="../../assets/upload_icon.png" alt="uploadImage">
+            <img *ngIf="image!='' && !newImage" src="data:image/JPEG;base64,{{image}}" class="uploadedImage"/>
+            <img *ngIf="image!='' && newImage" src="{{image}}" class="uploadedImage"/>
+            <h3 *ngIf="image==''" class="text-wrapper">Glisser déposer vos fichier ici</h3>
+            <h3 *ngIf="image==''" class="text-wrapper">ou</h3>
+            <button *ngIf="image==''" mat-raised-button color="primary" for="fileDropRef">Sélectionner un fichier</button>
+        </div>
+        <button *ngIf="image!=''" mat-raised-button color="primary" (click)="deletePicture()">Effacer l'image</button>
+       <mat-form-field>
+            <mat-label>Sélectionner une catégorie</mat-label>
+            <mat-select formControlName="category">
+                <mat-option *ngFor="let category of categories" [value]="category.category_id" >
+                {{category.name}}
+                </mat-option>
+            </mat-select>   
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Name" formControlName="name">
+            <mat-error *ngIf="productGroup.get('name')!.hasError('required')">
+                Le nom du produit est obligatoire!
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Description" formControlName="description">
+            <mat-error *ngIf="productGroup.get('description')!.hasError('required')">
+                Le description du produit est obligatoire!
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="Prix" formControlName="price">
+            <mat-hint>ex: 99.99</mat-hint>
+            <mat-error *ngIf="productGroup.get('price')!.hasError('required')">
+                Le prix du produit est obligatoire!
+            </mat-error>
+            <mat-error *ngIf="productGroup.get('price')!.hasError('pattern')">
+                Le prix n'est pas au bon format!
+            </mat-error>
+        </mat-form-field>
+        <button mat-raised-button type="button" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">ANNULER</button>
+        <button *ngIf="product === undefined" mat-raised-button type="submit" class="mt-5" color="primary">AJOUTER UN PRODUIT</button>
+        <button *ngIf="product !== undefined" mat-raised-button type="submit" class="mt-5" color="primary">SAUVEGARDER LE PRODUIT</button>
+    </form>
+    </mat-card>
+</div>
+
+

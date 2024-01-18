@@ -1,0 +1,15 @@
+<mat-toolbar>
+  <!-- logo DigitHub -->
+  <span>DigitHub</span>
+  <span class="example-spacer"></span>
+  <button mat-icon-button routerLink="/home">
+    <mat-icon>home</mat-icon>
+  </button>
+  <app-login-button *ngIf="!isLoggedIn" class="button"></app-login-button>
+  <app-sign-in-button *ngIf="!isLoggedIn" class="button"></app-sign-in-button>
+  <app-account-button *ngIf="isLoggedIn" class="button"></app-account-button>
+  <app-logout-button *ngIf="isLoggedIn" class="button"></app-logout-button>
+  <mat-slide-toggle [checked]="isDarkMode" (click)="toggleDarkMode()"></mat-slide-toggle>
+  <mat-icon matSuffix fontIcon="dark_mode"></mat-icon>
+  <mat-icon matSuffix (click)="goToCart()" matBadge="{{nbOfItems}}" matBadgeColor="accent" aria-hidden="false">shopping_cart</mat-icon>
+</mat-toolbar>

@@ -1,0 +1,88 @@
+<div class="register-user-component">
+    <mat-card class="mat-card">
+        <mat-toolbar class="toolbar" color="primary">
+            <mat-toolbar-row>
+                <span *ngIf="user===undefined" class="span">Créer un utilisateur</span>
+                <span *ngIf="user!==undefined" class="span">Editer un utilisateur</span>
+            </mat-toolbar-row>
+        </mat-toolbar>
+        <form class="register-form" [formGroup]="userGroup" (ngSubmit)="updateUser()">
+            <div class="form-input">
+                <mat-form-field>
+                    <input matInput placeholder="Prénom" type="text" formControlName="first_name">
+                    <mat-error *ngIf="userGroup.get('first_name')!.hasError('required')">
+                        Le Prénom est obligatoire!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-input">
+                <mat-form-field>
+                    <input matInput placeholder="Nom" formControlName="last_name">
+                    <mat-error *ngIf="userGroup.get('last_name')!.hasError('required')">
+                        Le Nom est obligatoire!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-input">
+                <mat-form-field  *ngIf="!user" >
+                    <input matInput color="red" [readonly]="user!==undefined" class="emailInput"  type="email" placeholder="Email" formControlName="mail" placeholder="Ex. pat@example.com">
+                    <mat-hint *ngIf="user">
+                        L'email ne peut pas être changer!
+                    </mat-hint>
+                    <mat-error *ngIf="userGroup.get('mail')!.hasError('required')">
+                        L'email est <strong>obligatoire!</strong>
+                    </mat-error>
+                    <mat-error *ngIf="userGroup.get('mail')!.hasError('email')">
+                        L'email n'est pas valide!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-input">
+                <mat-form-field  *ngIf="user" appearance="outline">
+                    <input matInput color="red" [readonly]="user!==undefined" type="email" formControlName="mail">
+                    <mat-hint *ngIf="user">
+                        L'email ne peut pas être changer!
+                    </mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="form-input">
+                <mat-form-field *ngIf="!user" >
+                    <input  matInput placeholder="Password" [type]="hidePassword ? 'password' : 'text'" formControlName="password" required>
+                    <mat-icon matSuffix (click)="hidePassword = !hidePassword">{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                    <mat-error *ngIf="userGroup.get('password')!.hasError('required')">
+                        Le mot de passe est obligatoire!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-input">
+                <mat-form-field *ngIf="!user">
+                    <input matInput placeholder="Confirm password" [type]="hidePassword ? 'password' : 'text'" formControlName="confirmPassword" required>
+                    <mat-error *ngIf="userGroup.get('confirmPassword')!.hasError('required')">
+                        Le mot de passe est obligatoire!
+                    </mat-error>
+                    <mat-error *ngIf="userGroup.get('confirmPassword')!.hasError('matching')">
+                        Les mots de passe ne correspondent pas!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="form-input">
+                <mat-form-field color="primary">
+                    <mat-label>Date de naissance</mat-label>
+                    <input matInput [matDatepicker]="datepicker" formControlName="birthdate">
+                    <mat-hint>DD/MM/YYYY</mat-hint>
+                    <mat-datepicker-toggle matIconSuffix [for]="datepicker"></mat-datepicker-toggle>
+                    <mat-datepicker #datepicker></mat-datepicker>
+                    <mat-error *ngIf="userGroup.get('birthdate')!.hasError('required')">
+                        La date de naissance est obligatoire!
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <mat-error *ngIf="userAlreadyexistLabel && userAlreadyexistLabel.length >0">{{userAlreadyexistLabel}}</mat-error>
+            <button *ngIf="user" mat-raised-button type="button" routerLink="/retrieve-password" routerLinkActive="active" ariaCurrentWhenActive="page">MODIFIER LE MOT DE PASSE</button>
+            <div class="form-input">
+                <button mat-raised-button type="button" routerLink="/home" routerLinkActive="active" ariaCurrentWhenActive="page">ANNULER</button>
+                <button mat-raised-button type="submit" class="mt-5" color="primary">SAUVEGARDER</button>
+            </div>
+        </form>
+    </mat-card> 
+</div>  

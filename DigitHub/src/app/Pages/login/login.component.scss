@@ -1,0 +1,30 @@
+.login-component {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-card {
+    width: 30%;
+    padding-left: 2%;
+    padding-right: 2%;
+    padding-bottom: 2%;
+    padding-top: 2%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+.span {
+    margin: auto;
+}
+
+.forgottenPassord {
+    text-decoration: underline;
+    color:blue;
+    font-weight: bold;
+    text-align: right;
+    margin-bottom: 2%;
+}

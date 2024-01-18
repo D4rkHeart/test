@@ -1,0 +1,7 @@
+<app-header></app-header>
+<div class="text-wrapper">
+    <h3>Montant total à payer: {{totalAmount()}}.-</h3>
+    <h1>Ne pas rafraichir la page pendant que la transaction s'éxecute</h1>
+    <div #paymentRef></div>
+    <button mat-raised-button type="button" routerLink="/cart" routerLinkActive="active" ariaCurrentWhenActive="page">ANNULER</button>
+</div>

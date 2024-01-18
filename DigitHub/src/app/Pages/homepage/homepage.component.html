@@ -1,0 +1,45 @@
+<app-header [nbOfItems]="nbOfItems"></app-header>
+<mat-drawer-container class="drawer" autosize="true">
+    <mat-drawer mode="side" opened class="sideDrawer">
+        <mat-nav-list>
+            <button *ngIf="isAdmin" type="button" class="buttonSideDrawer" [routerLink]="['/add-category']" mat-list-item>Ajouter une catégorie</button>
+            <button class="buttonSideDrawer" (click)="setAllProducts()" mat-list-item>Aucune catégorie</button>
+            <button class="buttonSideDrawer" (click)="filterProduct(category)" mat-list-item *ngFor="let category of categories">{{category.name}}
+              <button mat-icon-button *ngIf="isAdmin" [routerLink]="['/edit-category', category.category_id]">
+                <mat-icon >edit</mat-icon>
+              </button>
+              <button mat-icon-button *ngIf="isAdmin" (click)="deleteCategory(category.category_id)">
+                <mat-icon  fontIcon="">delete</mat-icon>
+              </button>
+            </button>
+        </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content class="drawerContent">
+      <mat-card *ngIf="isAdmin" class="addProductCard">
+        <mat-card-actions>
+          <button mat-button routerLink="/add-product" routerLinkActive="active" ariaCurrentWhenActive="page">ADD PRODUCT</button>
+        </mat-card-actions>
+      </mat-card>
+        <div *ngFor="let product of displayedProducts" class="prodcutCard">
+            <mat-card>
+              <mat-card-header class="mat-product-image">
+                <img *ngIf="product.image" class="product-image" mat-card-image src="data:image/JPEG;base64,{{product.image}}" alt="Product Image">
+              </mat-card-header>
+              <mat-card-content>
+                  <mat-card-title>{{product.name}}</mat-card-title>
+                  <mat-card-subtitle>PRIX {{product.price}}</mat-card-subtitle>
+              </mat-card-content>
+              <mat-card-actions>
+                <button mat-raised-button [routerLink]="['/detail-product', product.product_id]" routerLinkActive="active" ariaCurrentWhenActive="page">DETAILS</button>
+                <button mat-raised-button (click)="addProductToCart(product)">ADD TO CART</button>
+                <button mat-icon-button *ngIf="isAdmin" [routerLink]="['/edit-product', product.product_id]" routerLinkActive="active" ariaCurrentWhenActive="page">
+                  <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button *ngIf="isAdmin" (click)="deleteProduct(product.product_id)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </mat-card-actions>
+            </mat-card>
+        </div>
+    </mat-drawer-content>
+</mat-drawer-container>
